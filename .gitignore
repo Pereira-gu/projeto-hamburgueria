@@ -1,0 +1,29 @@
+# ===================================================================
+# ARQUIVO .GITIGNORE PARA PROJETO PHP (Saboroso Burger)
+# ===================================================================
+
+# 1. Arquivos de Credenciais e Variáveis de Ambiente
+# Nunca envie suas senhas para o repositório!
+.env
+
+# 2. Dependências de Ferramentas (PHP e Node.js)
+# Essas pastas são recriadas com os comandos "composer install" ou "npm install"
+/vendor/
+/node_modules/
+
+# 3. Arquivos de Sistema Operacional
+# Arquivos gerados automaticamente pelo macOS e Windows
+.DS_Store
+Thumbs.db
+
+# 4. Arquivos de Configuração de Editores e IDEs
+# Configurações pessoais do seu ambiente de desenvolvimento
+.vscode/
+.idea/
+
+# 5. Logs e Arquivos Temporários
+# Arquivos de log que podem conter informações sensíveis ou ser muito grandes
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

@@ -1,0 +1,243 @@
+/* --- CONFIGURAÇÕES GLOBAIS E VARIÁVEIS DE COR --- */
+:root {
+    --cor-primaria: #FFA000;
+    --cor-fundo-escuro: #1c1c1c;
+    --cor-fundo-claro: #f5f5f5;
+    --cor-texto-claro: #ffffff;
+    --cor-texto-escuro: #333333;
+    --cor-sombra: rgba(0, 0, 0, 0.1);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Poppins', sans-serif; background-color: var(--cor-fundo-claro); color: var(--cor-texto-escuro); line-height: 1.6; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+main { padding: 40px 0; }
+.page-content h1 { text-align: center; font-size: 2.8rem; margin-bottom: 40px; color: var(--cor-texto-escuro); }
+
+/* --- CABEÇALHO E RODAPÉ --- */
+header { background-color: var(--cor-fundo-escuro); color: var(--cor-texto-claro); padding: 20px 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px var(--cor-sombra); }
+header .container { display: flex; justify-content: space-between; align-items: center; }
+.logo { font-size: 1.8rem; font-weight: 700; color: var(--cor-primaria); text-decoration: none; }
+footer { background-color: var(--cor-fundo-escuro); color: var(--cor-texto-claro); text-align: center; padding: 20px 0; margin-top: 40px; }
+
+/* --- BOTÕES E ELEMENTOS GERAIS --- */
+.btn-login { background-color: var(--cor-primaria); color: var(--cor-texto-escuro); padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: 600; transition: background-color 0.3s ease; }
+.btn-login:hover { background-color: #ffb000; }
+.btn-logout { background-color: #e63946; color: #ffffff; padding: 10px 15px; border-radius: 5px; text-decoration: none; font-weight: 600; transition: background-color 0.3s ease; }
+.btn-logout:hover { background-color: #d62828; }
+.mensagem-feedback { padding: 15px; margin-bottom: 20px; border-radius: 5px; text-align: center; font-weight: 600; }
+.mensagem-erro { background-color: #f8d7da; color: #721c24; }
+.mensagem-sucesso { background-color: #d4edda; color: #155724; }
+
+/* --- NAVEGAÇÃO PRINCIPAL (COM DROPDOWN) --- */
+.main-nav-links ul { list-style: none; display: flex; gap: 25px; margin: 0; padding: 0; }
+.main-nav-links ul a { color: var(--cor-texto-claro); text-decoration: none; font-weight: 600; transition: color 0.3s ease; }
+.main-nav-links ul a:hover { color: var(--cor-primaria); }
+.user-menu-container { position: relative; }
+.user-menu-button { background-color: transparent; border: none; color: var(--cor-texto-claro); font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+.user-menu-button .arrow-down { font-size: 0.7rem; transition: transform 0.2s ease-in-out; }
+.user-menu-button.active .arrow-down { transform: rotate(180deg); }
+.user-menu-dropdown { display: none; position: absolute; top: 140%; right: 0; background-color: #fff; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.2); min-width: 200px; z-index: 1000; overflow: hidden; }
+.user-menu-dropdown.show { display: block; }
+.user-menu-dropdown a { display: block; padding: 12px 20px; color: var(--cor-texto-escuro); text-decoration: none; font-size: 0.95rem; transition: background-color 0.2s ease; }
+.user-menu-dropdown a:hover { background-color: #f5f5f5; }
+.user-menu-dropdown .logout-link { border-top: 1px solid #eee; color: #c0392b; font-weight: 600; }
+
+/* --- CARDÁPIO (MENU) --- */
+.categoria { margin-bottom: 50px; }
+.categoria h2 { font-size: 2.2rem; font-weight: 700; color: var(--cor-texto-escuro); border-bottom: 3px solid var(--cor-primaria); padding-bottom: 10px; margin-bottom: 30px; }
+.itens-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+.item { background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 15px var(--cor-sombra); overflow: hidden; display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.item:hover { transform: translateY(-8px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); }
+.item img { width: 100%; height: 200px; object-fit: cover; }
+.item-content { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+.item-content h3 { font-size: 1.4rem; margin-bottom: 10px; }
+.item-content p { color: #666; margin-bottom: 15px; flex-grow: 1; }
+.item-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 15px; }
+.preco { font-size: 1.6rem; font-weight: 700; color: var(--cor-primaria); }
+.btn-adicionar { background-color: var(--cor-primaria); color: var(--cor-texto-escuro); border: none; padding: 10px 15px; border-radius: 5px; font-weight: 600; cursor: pointer; font-size: 0.9rem; transition: background-color 0.3s ease; }
+.btn-adicionar:hover { background-color: #ffb000; }
+
+/* --- FILTROS DO CARDÁPIO --- */
+.filtros-container { background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 15px var(--cor-sombra); display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-bottom: 40px; align-items: center; }
+.filtro-busca { padding: 12px 12px 12px 40px; border: 2px solid #ddd; border-radius: 25px; font-size: 1rem; width: 100%; max-width: 350px; transition: all 0.3s ease; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23aaa' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: 15px center; }
+.filtro-busca:focus { outline: none; border-color: var(--cor-primaria); box-shadow: 0 0 0 3px rgba(255, 160, 0, 0.3); }
+.filtro-btn { background-color: #f0f0f0; color: #555; border: 2px solid transparent; padding: 10px 20px; border-radius: 20px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; text-transform: capitalize; }
+.filtro-btn:hover { background-color: #e0e0e0; border-color: #ccc; }
+.filtro-btn.ativo { background-color: var(--cor-primaria); color: var(--cor-texto-escuro); border-color: var(--cor-primaria); transform: scale(1.05); }
+
+/* --- PÁGINA DE DETALHES DO PRODUTO --- */
+.detalhe-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 50px; align-items: flex-start; background-color: #ffffff; padding: 40px; border-radius: 8px; box-shadow: 0 4px 20px var(--cor-sombra); }
+.detalhe-imagem img { width: 100%; border-radius: 8px; object-fit: cover; }
+.detalhe-info h1 { text-align: left; font-size: 2.5rem; margin-bottom: 15px; }
+.detalhe-descricao { font-size: 1.1rem; color: #555; line-height: 1.7; margin-bottom: 25px; }
+.detalhe-preco { font-size: 2.8rem; font-weight: 700; color: var(--cor-primaria); margin-bottom: 30px; }
+.detalhe-add-carrinho { width: 100%; padding: 18px; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px; }
+.opcionais-container { margin-top: 25px; border-top: 1px solid #eee; padding-top: 25px; }
+.opcional-grupo { margin-bottom: 20px; }
+.opcional-grupo h3 { font-size: 1.2rem; margin-bottom: 10px; }
+.opcional-item label { display: flex; justify-content: space-between; padding: 10px; border-radius: 5px; cursor: pointer; transition: background-color 0.2s ease; }
+.opcional-item label:hover { background-color: #f5f5f5; }
+.opcional-item input { margin-right: 10px; }
+.opcional-preco { font-weight: 600; color: #007bff; }
+#preco-total { transition: color 0.3s ease, transform 0.3s ease; }
+
+/* --- NOTIFICAÇÕES (TOAST) E CONTADOR DO CARRINHO --- */
+#toast-container { position: fixed; top: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
+.toast { background-color: #28a745; color: #fff; padding: 15px 25px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); font-weight: 600; opacity: 0; transform: translateX(100%); transition: all 0.4s ease; }
+.toast.show { opacity: 1; transform: translateX(0); }
+.toast.error { background-color: #dc3545; }
+.cart-badge { background-color: #e63946; color: #fff; padding: 2px 8px; font-size: 0.8rem; font-weight: 700; border-radius: 10px; line-height: 1; }
+
+/* --- ESTRELAS DE AVALIAÇÃO --- */
+.avaliacao-estrelas-card { margin-bottom: 10px; display: flex; align-items: center; gap: 5px; }
+.avaliacao-estrelas-card .estrela { font-size: 1.1rem; color: #ccc; }
+.avaliacao-estrelas-card .estrela.preenchida { color: #ffc107; }
+.avaliacao-estrelas-card .total-avaliacoes { font-size: 0.85rem; color: #777; margin-left: 5px; }
+.avaliacao-estrelas-detalhe { margin: -10px 0 20px 0; display: flex; align-items: center; gap: 5px; }
+.avaliacao-estrelas-detalhe .estrela { font-size: 1.5rem; color: #ccc; }
+.avaliacao-estrelas-detalhe .estrela.preenchida { color: #ffc107; }
+.avaliacao-estrelas-detalhe .total-avaliacoes-detalhe { font-size: 1rem; color: #555; margin-left: 10px; font-weight: 600; }
+
+/* --- PÁGINA DO CARRINHO --- */
+.carrinho-table { width: 100%; border-collapse: collapse; margin-top: 20px; background-color: #fff; box-shadow: 0 4px 15px var(--cor-sombra); border-radius: 8px; overflow: hidden; }
+.carrinho-table th, .carrinho-table td { border-bottom: 1px solid #ddd; padding: 20px; text-align: left; vertical-align: middle; }
+.carrinho-table th { background-color: var(--cor-fundo-escuro); color: var(--cor-texto-claro); }
+.produto-info-carrinho { display: flex; align-items: center; gap: 15px; }
+.produto-info-carrinho img { border-radius: 5px; }
+.personalizacao-detalhes { font-size: 0.85rem; color: #666; margin-top: 5px; }
+.total-carrinho { text-align: right; font-size: 1.8rem; font-weight: bold; margin-top: 30px; }
+.btn-finalizar { background-color: #28a745; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 20px; float: right; font-weight: 600; border: none; cursor: pointer; }
+.carrinho-vazio { text-align: center; padding: 50px 20px; background-color: #fff; border-radius: 8px; }
+
+/* --- CONTROLE DE QUANTIDADE (STEPPER) --- */
+.quantity-stepper { display: flex; align-items: center; justify-content: center; gap: 10px; }
+.quantity-btn { background-color: #f0f0f0; border: 1px solid #ddd; color: var(--cor-texto-escuro); cursor: pointer; font-size: 1.2rem; font-weight: 600; width: 38px; height: 38px; border-radius: 50%; padding: 0; line-height: 38px; text-align: center; transition: all 0.2s ease; }
+.quantity-btn:hover { background-color: var(--cor-primaria); color: var(--cor-texto-escuro); border-color: var(--cor-primaria); transform: scale(1.05); }
+.quantity-btn:active { transform: scale(0.98); }
+.quantity-value { font-size: 1.2rem; font-weight: 700; min-width: 30px; text-align: center; }
+.action-delete-item { color: #e63946; font-weight: 600; cursor: pointer; text-decoration: none; }
+.action-delete-item:hover { text-decoration: underline; }
+
+/* --- PÁGINA DE CHECKOUT --- */
+.checkout-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 30px; align-items: flex-start; }
+.checkout-form-box { text-align: left; padding: 40px; }
+.checkout-section { border-bottom: 1px solid #eee; padding-bottom: 25px; margin-bottom: 25px; }
+.checkout-section:last-of-type { border-bottom: none; margin-bottom: 0; }
+.checkout-form-box h2 { font-size: 1.3rem; margin-bottom: 20px; text-align: left; }
+.checkout-form-box textarea { resize: none; }
+.checkout-form-box textarea#observacoes { height: 100px; }
+.checkout-form-box textarea#endereco { height: 55px; padding-top: 15px; }
+.option-group { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; }
+.option-box { border: 2px solid #ddd; border-radius: 8px; padding: 15px; cursor: pointer; transition: all 0.2s ease; }
+.option-box input[type="radio"] { display: none; }
+.option-box-content { display: flex; flex-direction: column; text-align: center; }
+.option-box-content strong { font-size: 1.1rem; }
+.option-box-content span { font-size: 0.9rem; color: #777; }
+.option-box input[type="radio"]:checked + .option-box-content { color: var(--cor-primaria); }
+input[type="radio"]:checked + .option-box-content span { color: var(--cor-texto-escuro); }
+.option-box:has(input[type="radio"]:checked) { border-color: var(--cor-primaria); box-shadow: 0 0 0 2px var(--cor-primaria); }
+.resumo-pedido { background-color: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 20px var(--cor-sombra); position: sticky; top: 120px; }
+.resumo-pedido h3 { font-size: 1.5rem; margin-bottom: 20px; }
+.resumo-pedido ul { list-style: none; padding: 0; }
+.resumo-pedido li { display: flex; justify-content: space-between; margin-bottom: 15px; color: #555; }
+.resumo-pedido hr { margin: 20px 0; border: none; border-top: 1px solid #eee; }
+.total-resumo { display: flex; justify-content: space-between; font-size: 1.4rem; }
+.btn-confirmar-pedido { width: 100%; padding: 15px; background-color: #28a745; color: white; font-size: 1.2rem; font-weight: 600; border-radius: 5px; border: none; cursor: pointer; margin-top: 10px; }
+.step-navigation { display: flex; justify-content: space-between; margin-top: 30px; }
+.step-navigation button { padding: 12px 0; min-width: 140px; text-align: center; font-size: 1rem; font-weight: 600; border-radius: 5px; border: 2px solid var(--cor-primaria); cursor: pointer; background-color: #fff; color: var(--cor-primaria); transition: all 0.2s ease; }
+.step-navigation .btn-next, .step-navigation .btn-confirmar-pedido { background-color: var(--cor-primaria); color: var(--cor-texto-escuro); }
+.step-navigation button:hover { opacity: 0.9; transform: scale(1.02); }
+.step-navigation:has(.btn-next:only-child) { justify-content: flex-end; }
+
+/* --- FORMULÁRIOS (LOGIN, CADASTRO, MINHA CONTA) --- */
+.form-box { background-color: #ffffff; padding: 40px; border-radius: 8px; box-shadow: 0 4px 20px var(--cor-sombra); width: 100%; max-width: 450px; text-align: center; margin: 20px auto; }
+.form-box h2 { margin-bottom: 25px; font-size: 2rem; }
+.form-box input, .form-box textarea, .form-box select { width: 100%; padding: 15px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem; }
+.form-box button { width: 100%; padding: 15px; background-color: var(--cor-primaria); color: var(--cor-texto-escuro); border: none; border-radius: 5px; font-size: 1.1rem; font-weight: 600; cursor: pointer; }
+.form-box label { display: block; text-align: left; font-weight: 600; margin-bottom: 5px; margin-top: 15px; }
+.form-switcher { margin-top: 25px; font-size: 0.95rem; color: #555; }
+.form-switcher a { color: var(--cor-primaria); font-weight: 600; text-decoration: none; cursor: pointer; }
+.form-switcher a:hover { text-decoration: underline; }
+
+/* --- PÁGINA MINHA CONTA --- */
+.conta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: flex-start; }
+
+/* --- PÁGINA MEUS PEDIDOS --- */
+.pedidos-table { width: 100%; border-collapse: collapse; margin-top: 20px; background-color: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+.pedidos-table th, .pedidos-table td { border-bottom: 1px solid #ddd; padding: 15px; text-align: left; vertical-align: middle; }
+.pedidos-table th { background-color: var(--cor-fundo-escuro); color: var(--cor-texto-claro); }
+.status-badge { padding: 5px 12px; border-radius: 15px; font-weight: 600; font-size: 0.9rem; color: #fff; text-align: center; }
+.status-pendente { background-color: #ffc107; color: #333; }
+.status-em-preparo { background-color: #17a2b8; }
+.status-saiu-para-entrega { background-color: #007bff; }
+.status-concluido { background-color: #28a745; }
+.status-cancelado { background-color: #dc3545; }
+
+/* --- PÁGINA DE AVALIAÇÃO --- */
+.avaliacao-form .item-para-avaliar { display: flex; align-items: flex-start; gap: 20px; padding: 20px; margin-bottom: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+.avaliacao-form img { border-radius: 5px; }
+.avaliacao-form .item-info h3 { margin: 0 0 15px; }
+.star-rating { display: flex; flex-direction: row-reverse; justify-content: flex-end; }
+.star-rating input[type="radio"] { display: none; }
+.star-rating label { font-size: 2rem; color: #ddd; cursor: pointer; transition: color 0.2s; }
+.star-rating input[type="radio"]:checked ~ label,
+.star-rating label:hover,
+.star-rating label:hover ~ label { color: #ffc107; }
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 900px) {
+    .detalhe-grid, .checkout-grid, .conta-grid { grid-template-columns: 1fr; }
+    .resumo-pedido { position: static; margin-top: 30px; }
+    .detalhe-info h1 { font-size: 2rem; }
+    .detalhe-preco { font-size: 2.2rem; }
+}
+@media (max-width: 768px) {
+    header .container { flex-direction: column; gap: 15px; }
+    nav ul { padding: 0; }
+    .page-content h1 { font-size: 2rem; }
+    .categoria h2 { font-size: 1.8rem; }
+}
+/* --- PÁGINA MINHA CONTA --- */
+.conta-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+.conta-nav {
+    display: flex;
+    margin-bottom: -1px; /* Faz as abas se conectarem com o form-box */
+}
+.conta-nav-btn {
+    flex-grow: 1;
+    padding: 15px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    background-color: #f5f5f5;
+    color: #777;
+    border-bottom: 1px solid #ddd;
+}
+.conta-nav-btn:first-child {
+    border-top-left-radius: 8px;
+}
+.conta-nav-btn:last-child {
+    border-top-right-radius: 8px;
+}
+.conta-nav-btn.active {
+    background-color: #fff;
+    color: var(--cor-texto-escuro);
+    border-bottom: 1px solid #fff; /* Cobre a borda inferior do form-box */
+}
+.conta-form {
+    display: none; /* Todos os formulários começam escondidos */
+    margin-top: 0;
+    max-width: 100%;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.conta-form.active {
+    display: block; /* Mostra apenas o formulário ativo */
+}
+.conta-form h2 {
+    display: none; /* Esconde os títulos, pois as abas já os mostram */
+}

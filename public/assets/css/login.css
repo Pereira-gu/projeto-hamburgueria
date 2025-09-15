@@ -1,0 +1,135 @@
+/* =================================================================== */
+/* CÓDIGO COMPLETO E CORRIGIDO PARA A PÁGINA               */
+/* =================================================================== */
+
+:root {
+    --cor-primaria: #FFA000;
+    --cor-fundo-escuro: #1c1c1c;
+    --cor-fundo-claro: #f5f5f5;
+    --cor-texto-claro: #ffffff;
+    --cor-texto-escuro: #333333;
+    --cor-sombra: rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* --- LÓGICA DO LAYOUT "STICKY FOOTER" --- */
+html, body {
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--cor-fundo-claro);
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex-grow: 1; /* Faz o conteúdo principal crescer e empurrar o rodapé */
+}
+/* --- FIM DA LÓGICA DO LAYOUT --- */
+
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
+}
+
+/* --- ESTILOS DO CABEÇALHO --- */
+header {
+    background-color: var(--cor-fundo-escuro);
+    padding: 20px 0;
+    box-shadow: 0 2px 10px var(--cor-sombra);
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--cor-primaria);
+    text-decoration: none;
+}
+
+.btn-home {
+    border: 2px solid var(--cor-primaria);
+    color: var(--cor-primaria);
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-home:hover {
+    background-color: var(--cor-primaria);
+    color: var(--cor-texto-escuro);
+}
+
+
+/* --- ÁREA CENTRAL COM OS FORMULÁRIOS --- */
+main {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 40px;
+    padding: 40px 20px;
+}
+
+.form-box {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px var(--cor-sombra);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.form-box h2 {
+    margin-bottom: 25px;
+    font-size: 2rem;
+}
+
+.form-box input {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.form-box button {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--cor-primaria);
+    color: var(--cor-texto-escuro);
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+
+/* --- RODAPÉ --- */
+footer {
+    background-color: var(--cor-fundo-escuro);
+    color: var(--cor-texto-claro);
+    text-align: center;
+    padding: 20px 0;
+}
