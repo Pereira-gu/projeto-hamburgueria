@@ -1,3 +1,2 @@
 <?php
-define('BASE_URL', 'http://localhost/projeto_h/public');
-?>
+define('BASE_URL', 'http://localhost/projeto-h/public');
