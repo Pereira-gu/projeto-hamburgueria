@@ -11,7 +11,17 @@ try {
     $fechamento = $configs['HORARIO_FECHAMENTO'] ?? '23:59';
     date_default_timezone_set('America/Sao_Paulo');
     $hora_atual = date('H:i');
-    if ($hora_atual >= $abertura && $hora_atual < $fechamento) $loja_aberta = true;
+    if ($fechamento < $abertura) {
+        // A loja está aberta se a hora atual for MAIOR que a abertura OU MENOR que o fechamento.
+        if ($hora_atual >= $abertura || $hora_atual < $fechamento) {
+            $loja_aberta = true;
+        }
+    } else {
+        // Caso contrário, o funcionamento é no mesmo dia. A lógica original funciona.
+        if ($hora_atual >= $abertura && $hora_atual < $fechamento) {
+            $loja_aberta = true;
+        }
+    }
 } catch (PDOException $e) {
     $loja_aberta = true;
 }
@@ -57,15 +67,15 @@ try {
                 <tbody>
                     <?php foreach ($itens_carrinho as $item): ?>
                         <?php
-                            $preco_item_personalizado = $item['preco_produto'];
-                            $personalizacao = json_decode($item['personalizacao'], true);
-                            if (!empty($personalizacao)) {
-                                foreach ($personalizacao as $opcional) {
-                                    $preco_item_personalizado += $opcional['preco'];
-                                }
+                        $preco_item_personalizado = $item['preco_produto'];
+                        $personalizacao = json_decode($item['personalizacao'], true);
+                        if (!empty($personalizacao)) {
+                            foreach ($personalizacao as $opcional) {
+                                $preco_item_personalizado += $opcional['preco'];
                             }
-                            $subtotal = $preco_item_personalizado * $item['quantidade'];
-                            $total_carrinho += $subtotal;
+                        }
+                        $subtotal = $preco_item_personalizado * $item['quantidade'];
+                        $total_carrinho += $subtotal;
                         ?>
                         <tr data-carrinho-id="<?php echo $item['carrinho_id']; ?>">
                             <td>
@@ -75,7 +85,7 @@ try {
                                         <span><?php echo htmlspecialchars($item['nome_produto']); ?></span>
                                         <?php if (!empty($personalizacao)): ?>
                                             <div class="personalizacao-detalhes">
-                                                <?php foreach($personalizacao as $opcional): ?>
+                                                <?php foreach ($personalizacao as $opcional): ?>
                                                     + <?php echo htmlspecialchars($opcional['nome']); ?><br>
                                                 <?php endforeach; ?>
                                             </div>
@@ -101,7 +111,7 @@ try {
             </table>
 
             <div class="total-carrinho">Total: <span id="valor-total-carrinho">R$ <?php echo number_format($total_carrinho, 2, ',', '.'); ?></span></div>
-            
+
             <?php if ($loja_aberta): ?>
                 <a href="<?php echo BASE_URL; ?>/checkout.php" class="btn-finalizar">Finalizar Compra</a>
             <?php else: ?>
@@ -112,11 +122,11 @@ try {
                     <a class="btn-finalizar" style="background-color: #ccc; cursor: not-allowed; opacity: 0.6; float: right;">Finalizar Compra</a>
                 </div>
             <?php endif; ?>
-            
+
         <?php endif; ?>
     </div>
 </div>
 
-<?php 
+<?php
 require_once __DIR__ . '/../app/templates/footer.php';
 ?>

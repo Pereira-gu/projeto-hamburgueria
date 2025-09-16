@@ -11,7 +11,17 @@ try {
     $fechamento = $configs['HORARIO_FECHAMENTO'] ?? '23:59';
     date_default_timezone_set('America/Sao_Paulo');
     $hora_atual = date('H:i');
-    if ($hora_atual >= $abertura && $hora_atual < $fechamento) $loja_aberta = true;
+    if ($fechamento < $abertura) {
+        // A loja está aberta se a hora atual for MAIOR que a abertura OU MENOR que o fechamento.
+        if ($hora_atual >= $abertura || $hora_atual < $fechamento) {
+            $loja_aberta = true;
+        }
+    } else {
+        // Caso contrário, o funcionamento é no mesmo dia. A lógica original funciona.
+        if ($hora_atual >= $abertura && $hora_atual < $fechamento) {
+            $loja_aberta = true;
+        }
+    }
 } catch (PDOException $e) {
     $loja_aberta = true;
 }
@@ -38,7 +48,7 @@ try {
         header("Location: " . BASE_URL . "/index.php");
         exit();
     }
-    
+
     // Lógica para buscar os opcionais (existente)
     $sql_opcionais = "SELECT o.id, o.grupo, o.nome, o.preco FROM opcionais o JOIN produto_opcionais po ON o.id = po.opcional_id WHERE po.produto_id = ? ORDER BY o.grupo, o.nome";
     $stmt_opcionais = $pdo->prepare($sql_opcionais);
@@ -48,7 +58,6 @@ try {
     foreach ($opcionais_disponiveis as $opcional) {
         $opcionais_agrupados[$opcional['grupo']][] = $opcional;
     }
-
 } catch (PDOException $e) {
     error_log("Erro ao buscar detalhes do produto: " . $e->getMessage());
     die("Ops! Tivemos um problema ao carregar o produto. Por favor, tente novamente mais tarde.");
@@ -56,14 +65,46 @@ try {
 ?>
 <style>
     /* Estilos da personalização (existente) */
-    .opcionais-container { margin-top: 25px; border-top: 1px solid #eee; padding-top: 25px; }
-    .opcional-grupo { margin-bottom: 20px; }
-    .opcional-grupo h3 { font-size: 1.2rem; margin-bottom: 10px; }
-    .opcional-item label { display: flex; justify-content: space-between; padding: 10px; border-radius: 5px; cursor: pointer; transition: background-color 0.2s ease; }
-    .opcional-item label:hover { background-color: #f5f5f5; }
-    .opcional-item input { margin-right: 10px; }
-    .opcional-preco { font-weight: 600; color: #007bff; }
-    #preco-total { transition: color 0.3s ease, transform 0.3s ease; }
+    .opcionais-container {
+        margin-top: 25px;
+        border-top: 1px solid #eee;
+        padding-top: 25px;
+    }
+
+    .opcional-grupo {
+        margin-bottom: 20px;
+    }
+
+    .opcional-grupo h3 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+
+    .opcional-item label {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+    }
+
+    .opcional-item label:hover {
+        background-color: #f5f5f5;
+    }
+
+    .opcional-item input {
+        margin-right: 10px;
+    }
+
+    .opcional-preco {
+        font-weight: 600;
+        color: #007bff;
+    }
+
+    #preco-total {
+        transition: color 0.3s ease, transform 0.3s ease;
+    }
 </style>
 
 <div class="container page-content">
@@ -90,34 +131,34 @@ try {
                 <?php endif; ?>
 
                 <p class="detalhe-descricao"><?php echo htmlspecialchars($produto['descricao_produto']); ?></p>
-                
+
                 <?php if (!empty($opcionais_agrupados)): ?>
-                <div class="opcionais-container">
-                    <?php foreach($opcionais_agrupados as $grupo => $opcionais): ?>
-                        <div class="opcional-grupo">
-                            <h3><?php echo htmlspecialchars($grupo); ?></h3>
-                            <?php foreach($opcionais as $opcional): 
-                                $tipo_input = (in_array($grupo, ['Adicionais', 'Remover'])) ? 'checkbox' : 'radio';
-                            ?>
-                                <div class="opcional-item">
-                                    <label>
-                                        <span>
-                                            <input type="<?php echo $tipo_input; ?>" name="opcionais[<?php echo htmlspecialchars($grupo); ?>][]" value="<?php echo $opcional['id']; ?>" data-preco="<?php echo $opcional['preco']; ?>">
-                                            <?php echo htmlspecialchars($opcional['nome']); ?>
-                                        </span>
-                                        <?php if ($opcional['preco'] > 0): ?>
-                                            <span class="opcional-preco">+ R$ <?php echo number_format($opcional['preco'], 2, ',', '.'); ?></span>
-                                        <?php endif; ?>
-                                    </label>
-                                </div>
-                            <?php endforeach; ?>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
+                    <div class="opcionais-container">
+                        <?php foreach ($opcionais_agrupados as $grupo => $opcionais): ?>
+                            <div class="opcional-grupo">
+                                <h3><?php echo htmlspecialchars($grupo); ?></h3>
+                                <?php foreach ($opcionais as $opcional):
+                                    $tipo_input = (in_array($grupo, ['Adicionais', 'Remover'])) ? 'checkbox' : 'radio';
+                                ?>
+                                    <div class="opcional-item">
+                                        <label>
+                                            <span>
+                                                <input type="<?php echo $tipo_input; ?>" name="opcionais[<?php echo htmlspecialchars($grupo); ?>][]" value="<?php echo $opcional['id']; ?>" data-preco="<?php echo $opcional['preco']; ?>">
+                                                <?php echo htmlspecialchars($opcional['nome']); ?>
+                                            </span>
+                                            <?php if ($opcional['preco'] > 0): ?>
+                                                <span class="opcional-preco">+ R$ <?php echo number_format($opcional['preco'], 2, ',', '.'); ?></span>
+                                            <?php endif; ?>
+                                        </label>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
                 <?php endif; ?>
 
                 <div class="detalhe-preco" id="preco-total">R$ <?php echo number_format($produto['preco_produto'], 2, ',', '.'); ?></div>
-                
+
                 <?php if ($loja_aberta): ?>
                     <button type="submit" class="btn-login detalhe-add-carrinho js-add-to-cart">Adicionar ao Carrinho</button>
                 <?php else: ?>
@@ -132,32 +173,32 @@ try {
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    const precoBase = <?php echo $produto['preco_produto']; ?>;
-    const elementoPrecoTotal = document.getElementById('preco-total');
-    const inputsOpcionais = document.querySelectorAll('.opcional-item input');
+    document.addEventListener('DOMContentLoaded', function() {
+        const precoBase = <?php echo $produto['preco_produto']; ?>;
+        const elementoPrecoTotal = document.getElementById('preco-total');
+        const inputsOpcionais = document.querySelectorAll('.opcional-item input');
 
-    function atualizarPreco() {
-        let precoAdicional = 0;
+        function atualizarPreco() {
+            let precoAdicional = 0;
+            inputsOpcionais.forEach(input => {
+                if (input.checked) {
+                    precoAdicional += parseFloat(input.dataset.preco);
+                }
+            });
+
+            const precoFinal = precoBase + precoAdicional;
+            elementoPrecoTotal.textContent = 'R$ ' + precoFinal.toFixed(2).replace('.', ',');
+
+            elementoPrecoTotal.style.transform = 'scale(1.05)';
+            setTimeout(() => {
+                elementoPrecoTotal.style.transform = 'scale(1)';
+            }, 150);
+        }
+
         inputsOpcionais.forEach(input => {
-            if (input.checked) {
-                precoAdicional += parseFloat(input.dataset.preco);
-            }
+            input.addEventListener('change', atualizarPreco);
         });
-
-        const precoFinal = precoBase + precoAdicional;
-        elementoPrecoTotal.textContent = 'R$ ' + precoFinal.toFixed(2).replace('.', ',');
-        
-        elementoPrecoTotal.style.transform = 'scale(1.05)';
-        setTimeout(() => {
-            elementoPrecoTotal.style.transform = 'scale(1)';
-        }, 150);
-    }
-
-    inputsOpcionais.forEach(input => {
-        input.addEventListener('change', atualizarPreco);
     });
-});
 </script>
 
 <?php require_once __DIR__ . '/../app/templates/footer.php'; ?>
