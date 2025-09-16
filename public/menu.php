@@ -7,15 +7,23 @@ $loja_aberta = false;
 try {
     $stmt_config = $pdo->query("SELECT * FROM configuracoes WHERE chave IN ('HORARIO_ABERTURA', 'HORARIO_FECHAMENTO')");
     $configs = $stmt_config->fetchAll(PDO::FETCH_KEY_PAIR);
-    
+
     $abertura = $configs['HORARIO_ABERTURA'] ?? '00:00';
     $fechamento = $configs['HORARIO_FECHAMENTO'] ?? '23:59';
 
     date_default_timezone_set('America/Sao_Paulo');
     $hora_atual = date('H:i');
 
-    if ($hora_atual >= $abertura && $hora_atual < $fechamento) {
-        $loja_aberta = true;
+    if ($fechamento < $abertura) {
+        // A loja está aberta se a hora atual for MAIOR que a abertura OU MENOR que o fechamento.
+        if ($hora_atual >= $abertura || $hora_atual < $fechamento) {
+            $loja_aberta = true;
+        }
+    } else {
+        // Caso contrário, o funcionamento é no mesmo dia. A lógica original funciona.
+        if ($hora_atual >= $abertura && $hora_atual < $fechamento) {
+            $loja_aberta = true;
+        }
     }
 } catch (PDOException $e) {
     $loja_aberta = true;
@@ -46,7 +54,7 @@ try {
     foreach ($cardapio_dinamico as $categoria => $itens) {
         $cardapio_ordenado[$categoria] = $itens;
     }
-    
+
     if (!$loja_aberta) {
         echo "<div style='background-color: #f8d7da; color: #721c24; padding: 15px; text-align: center; border-radius: 8px; margin-bottom: 30px; font-weight: 600;'>";
         echo "Estamos fechados no momento. Nosso horário de funcionamento é das " . htmlspecialchars($abertura) . " às " . htmlspecialchars($fechamento) . ".";
@@ -64,7 +72,7 @@ try {
                 echo "<a href='" . BASE_URL . "/produto_detalhe.php?id=" . $item['id'] . "'><img src='" . BASE_URL . "/assets/images/" . htmlspecialchars($item['imagem']) . "' alt='" . htmlspecialchars($item['nome_produto']) . "'></a>";
                 echo "<div class='item-content'>";
                 echo "<a href='" . BASE_URL . "/produto_detalhe.php?id=" . $item['id'] . "' style='text-decoration: none; color: inherit;'><h3>" . htmlspecialchars($item['nome_produto']) . "</h3></a>";
-                
+
                 if ($item['total_avaliacoes'] > 0) {
                     echo "<div class='avaliacao-estrelas-card'>";
                     for ($i = 1; $i <= 5; $i++) {
@@ -77,7 +85,7 @@ try {
                 echo "<p>" . htmlspecialchars($item['descricao_produto']) . "</p>";
                 echo "<div class='item-footer'>";
                 echo "<span class='preco'>R$ " . number_format($item['preco_produto'], 2, ',', '.') . "</span>";
-                
+
                 if ($loja_aberta) {
                     echo "<form action='" . BASE_URL . "/actions/adicionar_carrinho.php' method='POST'>";
                     echo "<input type='hidden' name='csrf_token' value='" . $_SESSION['csrf_token'] . "'>";
@@ -88,7 +96,7 @@ try {
                 } else {
                     echo "<button type='button' class='btn-adicionar' disabled style='background-color: #ccc; cursor: not-allowed;'>Fechado</button>";
                 }
-                
+
                 echo "</div></div></div>";
             }
 
@@ -97,9 +105,7 @@ try {
     } else {
         echo "<p>Nenhum produto cadastrado no momento.</p>";
     }
-
 } catch (PDOException $e) {
     error_log("Erro no banco de dados: " . $e->getMessage());
     echo "<p>Ocorreu um erro ao carregar o cardápio. Tente novamente mais tarde.</p>";
 }
-?>
