@@ -241,3 +241,17 @@ input[type="radio"]:checked + .option-box-content span { color: var(--cor-texto-
 .conta-form h2 {
     display: none; /* Esconde os títulos, pois as abas já os mostram */
 }
+
+/* --- ESTILO DO BANNER DE AVISO DE PORTFÓLIO --- */
+.portfolio-banner {
+    background-color: #fff3cd; /* Amarelo claro */
+    color: #856404; /* Texto escuro para contraste */
+    text-align: center;
+    padding: 12px 0;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-bottom: 1px solid #ffeeba;
+}
+.portfolio-banner p {
+    margin: 0;
+}
