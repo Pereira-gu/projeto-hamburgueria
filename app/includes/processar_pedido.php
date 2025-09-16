@@ -19,18 +19,19 @@ $metodo_pagamento = $_POST['metodo_pagamento'] ?? 'Não informado';
 $troco_para = !empty($_POST['troco_para']) ? $_POST['troco_para'] : null;
 $observacoes = trim($_POST['observacoes']) ?? null;
 
-// Valida os dados de acordo com o tipo de entrega
 if ($tipo_entrega == 'delivery') {
-    $endereco = trim($_POST['endereco_entrega']);
-    $telefone = trim($_POST['telefone_contato']);
-    if (empty($endereco) || empty($telefone)) {
+    $endereco_entrega = trim($_POST['endereco_entrega']);
+    $telefone_contato = trim($_POST['telefone_contato']);
+    if (empty($endereco_entrega) || empty($telefone_contato)) {
         header('Location: ' . BASE_URL . '/checkout.php?status=erro_dados');
         exit();
     }
 } else {
-    $endereco = 'Retirada no Local';
-    $telefone = trim($_POST['telefone_retirada']);
-    if (empty($telefone)) {
+    // CORREÇÃO PRINCIPAL NO BACK-END:
+    // Define um valor padrão para o endereço e pega o telefone do campo correto.
+    $endereco_entrega = 'Retirada no Local';
+    $telefone_contato = trim($_POST['telefone_retirada']);
+    if (empty($telefone_contato)) {
         header('Location: ' . BASE_URL . '/checkout.php?status=erro_dados');
         exit();
     }
@@ -66,8 +67,11 @@ try {
     // 3. --- SQL ATUALIZADO PARA INCLUIR OS NOVOS CAMPOS ---
     $sql_pedido = "INSERT INTO pedidos (login_id, valor_total, endereco_entrega, telefone_contato, status, tipo_entrega, metodo_pagamento, troco_para, observacoes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt_pedido = $pdo->prepare($sql_pedido);
-    $stmt_pedido->execute([$id_usuario, $valor_total, $endereco, $telefone, 'Pendente', $tipo_entrega, $metodo_pagamento, $troco_para, $observacoes]);
-    
+    // A linha abaixo é a importante. Verifique se as variáveis estão corretas.
+    // ...
+    $stmt_pedido->execute([$id_usuario, $valor_total, $endereco_entrega, $telefone_contato, 'Pendente', $tipo_entrega, $metodo_pagamento, $troco_para, $observacoes]);
+    // ...
+
     $id_pedido = $pdo->lastInsertId();
 
     // 4. Insere os itens na tabela 'pedido_itens' (código existente)
@@ -93,7 +97,6 @@ try {
 
     header("Location: " . BASE_URL . "/pedido_sucesso.php");
     exit();
-
 } catch (Exception $e) {
     $pdo->rollBack();
     error_log("Erro ao processar pedido: " . $e->getMessage());
