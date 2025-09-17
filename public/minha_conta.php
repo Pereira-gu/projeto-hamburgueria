@@ -52,7 +52,7 @@ if (isset($_GET['erro'])) {
 
                 <label for="nome">Nome Completo</label>
                 <input type="text" id="nome" name="nome" value="<?php echo htmlspecialchars($usuario['nome'] ?? ''); ?>" required>
-                
+
                 <label for="email">E-mail</label>
                 <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($usuario['email'] ?? ''); ?>" required>
 
@@ -72,10 +72,10 @@ if (isset($_GET['erro'])) {
 
                 <label for="senha_atual">Senha Atual</label>
                 <input type="password" id="senha_atual" name="senha_atual" required>
-                
+
                 <label for="nova_senha">Nova Senha (mín. 8 caracteres)</label>
                 <input type="password" id="nova_senha" name="nova_senha" required minlength="8">
-                
+
                 <label for="confirmar_senha">Confirmar Nova Senha</label>
                 <input type="password" id="confirmar_senha" name="confirmar_senha" required>
 
@@ -86,29 +86,42 @@ if (isset($_GET['erro'])) {
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const navButtons = document.querySelectorAll('.conta-nav-btn');
-    const formContainers = document.querySelectorAll('.conta-form');
+    document.addEventListener('DOMContentLoaded', function() {
+        const navButtons = document.querySelectorAll('.conta-nav-btn');
+        const formContainers = document.querySelectorAll('.conta-form');
 
-    navButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            // Remove a classe 'active' de todos os botões e formulários
-            navButtons.forEach(btn => btn.classList.remove('active'));
-            formContainers.forEach(form => form.classList.remove('active'));
+        navButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove a classe 'active' de todos os botões e formulários
+                navButtons.forEach(btn => btn.classList.remove('active'));
+                formContainers.forEach(form => form.classList.remove('active'));
 
-            // Adiciona a classe 'active' ao botão clicado e ao formulário correspondente
-            this.classList.add('active');
-            const targetId = this.dataset.target;
-            document.getElementById(targetId).classList.add('active');
+                // Adiciona a classe 'active' ao botão clicado e ao formulário correspondente
+                this.classList.add('active');
+                const targetId = this.dataset.target;
+                document.getElementById(targetId).classList.add('active');
+            });
         });
-    });
 
-    // Verifica se há um erro relacionado à senha para já mostrar a aba correta
-    <?php if (isset($_GET['erro']) && in_array($_GET['erro'], ['senha_atual_invalida', 'senhas_nao_coincidem', 'senha_curta', 'campos_vazios'])): ?>
-        // Simula um clique no botão de alterar senha para abrir a aba correta
-        document.querySelector('.conta-nav-btn[data-target="senha-form-container"]').click();
-    <?php endif; ?>
-});
+        // Verifica se há um erro relacionado à senha para já mostrar a aba correta
+        <?php if (isset($_GET['erro']) && in_array($_GET['erro'], ['senha_atual_invalida', 'senhas_nao_coincidem', 'senha_curta', 'campos_vazios'])): ?>
+            // Simula um clique no botão de alterar senha para abrir a aba correta
+            document.querySelector('.conta-nav-btn[data-target="senha-form-container"]').click();
+        <?php endif; ?>
+        // --- LÓGICA DA MÁSCARA DE TELEFONE ---
+        const telefoneContaEl = document.getElementById('telefone');
+        if (telefoneContaEl) {
+            IMask(telefoneContaEl, {
+                mask: [{
+                        mask: '(00) 0000-0000'
+                    },
+                    {
+                        mask: '(00) 00000-0000'
+                    }
+                ]
+            });
+        }
+    });
 </script>
 
 <?php require_once __DIR__ . '/../app/templates/footer.php'; ?>

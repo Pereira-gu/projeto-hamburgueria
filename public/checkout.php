@@ -227,6 +227,22 @@ try {
         }
         radiosPagamento.forEach(radio => radio.addEventListener('change', toggleCampoTroco));
         toggleCampoTroco();
+
+        // --- LÓGICA DAS MÁSCARAS DE ENTRADA ---
+        const phoneMaskOptions = {
+            mask: [{
+                    mask: '(00) 0000-0000'
+                },
+                {
+                    mask: '(00) 00000-0000'
+                }
+            ]
+        };
+        const telefoneDeliveryEl = document.getElementById('telefone');
+        const telefoneRetiradaEl = document.getElementById('telefone_retirada');
+
+        if (telefoneDeliveryEl) IMask(telefoneDeliveryEl, phoneMaskOptions);
+        if (telefoneRetiradaEl) IMask(telefoneRetiradaEl, phoneMaskOptions);
     });
 </script>
 
