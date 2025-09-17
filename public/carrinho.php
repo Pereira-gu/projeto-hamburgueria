@@ -110,19 +110,18 @@ try {
                 </tbody>
             </table>
 
-            <div class="total-carrinho">Total: <span id="valor-total-carrinho">R$ <?php echo number_format($total_carrinho, 2, ',', '.'); ?></span></div>
+            <div class="carrinho-footer">
+                <div class="total-carrinho">Total: <span id="valor-total-carrinho">R$ <?php echo number_format($total_carrinho, 2, ',', '.'); ?></span></div>
 
-            <?php if ($loja_aberta): ?>
-                <a href="<?php echo BASE_URL; ?>/checkout.php" class="btn-finalizar">Finalizar Compra</a>
-            <?php else: ?>
-                <div style="text-align: right; margin-top: 10px;">
-                    <div style='background-color: #f8d7da; color: #721c24; padding: 15px; text-align: center; border-radius: 8px; display: inline-block; font-weight: 600; margin-bottom: 10px;'>
+                <?php if ($loja_aberta): ?>
+                    <a href="<?php echo BASE_URL; ?>/checkout.php" class="btn-finalizar">Finalizar Compra</a>
+                <?php else: ?>
+                    <div class="aviso-loja-fechada">
                         A loja está fechada e não aceita pedidos no momento.
                     </div>
-                    <a class="btn-finalizar" style="background-color: #ccc; cursor: not-allowed; opacity: 0.6; float: right;">Finalizar Compra</a>
-                </div>
-            <?php endif; ?>
-
+                    <a class="btn-finalizar desativado">Finalizar Compra</a>
+                <?php endif; ?>
+            </div>
         <?php endif; ?>
     </div>
 </div>
