@@ -16,11 +16,10 @@ $acao = $_POST['acao'] ?? '';
 
 // --- LÓGICA PARA ATUALIZAR DADOS (NOME, EMAIL, TELEFONE, ENDEREÇO) ---
 if ($acao === 'atualizar_dados') {
-    $nome = trim($_POST['nome']);
+    $nome = htmlspecialchars(trim($_POST['nome']));
     $email = trim($_POST['email']);
-    // NOVOS CAMPOS RECEBIDOS
-    $telefone = trim($_POST['telefone']);
-    $endereco = trim($_POST['endereco']);
+    $telefone = htmlspecialchars(trim($_POST['telefone']));
+    $endereco = htmlspecialchars(trim($_POST['endereco']));
 
     if (empty($nome) || empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
         header('Location: ' . BASE_URL . '/minha_conta.php?erro=dados_invalidos');
@@ -45,7 +44,6 @@ if ($acao === 'atualizar_dados') {
 
         header('Location: ' . BASE_URL . '/minha_conta.php?status=dados_ok');
         exit();
-
     } catch (PDOException $e) {
         die("Erro ao atualizar os dados: " . $e->getMessage());
     }
@@ -86,7 +84,6 @@ if ($acao === 'atualizar_senha') {
 
         header('Location: ' . BASE_URL . '/minha_conta.php?status=senha_ok');
         exit();
-
     } catch (PDOException $e) {
         die("Erro ao atualizar a senha.");
     }
@@ -95,4 +92,3 @@ if ($acao === 'atualizar_senha') {
 // Se nenhuma ação válida for encontrada, redireciona
 header('Location: ' . BASE_URL . '/minha_conta.php');
 exit();
-?>

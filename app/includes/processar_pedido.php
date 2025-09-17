@@ -15,13 +15,13 @@ $id_usuario = $_SESSION['usuario_id'];
 $tipo_entrega = $_POST['tipo_entrega'] ?? 'delivery';
 
 // --- NOVAS VARIÁVEIS RECEBIDAS DO FORMULÁRIO ---
-$metodo_pagamento = $_POST['metodo_pagamento'] ?? 'Não informado';
-$troco_para = !empty($_POST['troco_para']) ? $_POST['troco_para'] : null;
-$observacoes = trim($_POST['observacoes']) ?? null;
+$metodo_pagamento = htmlspecialchars($_POST['metodo_pagamento'] ?? 'Não informado');
+$troco_para = !empty($_POST['troco_para']) ? htmlspecialchars($_POST['troco_para']) : null;
+$observacoes = !empty($_POST['observacoes']) ? htmlspecialchars(trim($_POST['observacoes'])) : null;
 
 if ($tipo_entrega == 'delivery') {
-    $endereco_entrega = trim($_POST['endereco_entrega']);
-    $telefone_contato = trim($_POST['telefone_contato']);
+    $endereco_entrega = htmlspecialchars(trim($_POST['endereco_entrega']));
+    $telefone_contato = htmlspecialchars(trim($_POST['telefone_contato']));
     if (empty($endereco_entrega) || empty($telefone_contato)) {
         header('Location: ' . BASE_URL . '/checkout.php?status=erro_dados');
         exit();
