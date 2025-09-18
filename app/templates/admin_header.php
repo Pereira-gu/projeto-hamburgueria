@@ -11,22 +11,27 @@ if (!isset($_SESSION['usuario_id']) || !isset($_SESSION['is_admin']) || !$_SESSI
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <title>Painel Administrativo</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>/assets/css/main.css">
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>/assets/css/admin.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>/assets/css/admin.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
     <header>
         <div class="container">
             <a href="<?php echo BASE_URL; ?>/admin/index.php" class="logo">Admin Saboroso</a>
-            
+
             <nav class="admin-nav">
                 <a href="<?php echo BASE_URL; ?>/admin/index.php">Dashboard</a>
                 <a href="<?php echo BASE_URL; ?>/admin/gerenciar_pedidos.php">Pedidos</a>
-                
+                <a href="<?php echo BASE_URL; ?>/admin/gerenciar_produtos.php">Produtos</a>
+
                 <div class="admin-menu-container">
                     <button id="admin-menu-button" class="admin-menu-button">
                         Gerenciar

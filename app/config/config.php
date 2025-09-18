@@ -1,2 +1,2 @@
 <?php
-define('BASE_URL', 'http://localhost/projeto-h/public');
+define('BASE_URL', 'http://localhost/projeto_hamburgueria/public');
