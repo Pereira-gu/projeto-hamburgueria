@@ -131,11 +131,6 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`id`, `email`, `nome`, `senha`, `is_admin`, `endereco`, `telefone`) VALUES
-(8, 'gustavophenixgu@gmail.com', 'GUSTAVO DOS SANTOS PEREIRA', '$2y$10$SWWgUq3T1S2YqaFsUy5sQuCVxDMnHzV6v49z1egg96xkoSQG1H8U2', 1, 'guau gugua guguasd', '11123123123'),
-(9, 'pereira.lazyy@gmail.com', 'Jorge pereira', '$2y$10$yTOJEfxcmdR5PgiDdf5SwukUZymBg2TOrrSNVY5CyuRlp2zqTNCZ2', 0, NULL, NULL),
-(10, 'ola@gmail.com', 'ola ola', '$2y$10$.m/ChRmVhghx5bbNBC3Mkeh9ZIhZYeH/eQtIwWrhqew/HZ22XYqMK', 0, NULL, NULL),
-(11, 'jorgehorodrigues@gmail.com', 'Jorge Henrique de Oliveira Rodrigues', '$2y$10$tM6RQi39yTDvPJ2D0bTq4uDt4LTg31sjTENgn5Q9L1is6ecGFlK42', 0, NULL, NULL),
-(12, 'gusta@gmail.com', 'GUSTAVO DOS SANTOS PEREIRA', '$2y$10$l0XWhpfF0Auogz9ez11vC.ZeyDU39vEIzdSfauKIYinmASgwptNVC', 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
