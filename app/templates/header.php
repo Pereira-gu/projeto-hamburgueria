@@ -27,6 +27,9 @@ if (isset($_SESSION['usuario_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Saboroso Burger</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://unpkg.com/imask"></script>
+
     <link rel="icon" type="image/png" href="<?php echo BASE_URL; ?>/assets/images/favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
@@ -68,16 +71,16 @@ if (isset($_SESSION['usuario_id'])) {
                 ?>
                     <div class="user-menu-container">
                         <button id="user-menu-button" class="user-menu-button">
-                            Olá, <?php echo htmlspecialchars($primeiroNome); ?>
+                            <i class="fas fa-user-circle"></i> Olá, <?php echo htmlspecialchars($primeiroNome); ?>
                             <span class="arrow-down">▼</span>
                         </button>
                         <div id="user-dropdown" class="user-menu-dropdown">
-                            <a href="<?php echo BASE_URL; ?>/meus_pedidos.php">Meus Pedidos</a>
-                            <a href="<?php echo BASE_URL; ?>/minha_conta.php">Minha Conta</a>
+                            <a href="<?php echo BASE_URL; ?>/meus_pedidos.php"><i class="fas fa-receipt"></i> Meus Pedidos</a>
+                            <a href="<?php echo BASE_URL; ?>/minha_conta.php"><i class="fas fa-user-gear"></i> Minha Conta</a>
                             <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']): ?>
-                                <a href="<?php echo BASE_URL; ?>/admin/index.php">Painel Admin</a>
+                                <a href="<?php echo BASE_URL; ?>/admin/index.php"><i class="fas fa-user-shield"></i> Painel Admin</a>
                             <?php endif; ?>
-                            <a href="<?php echo BASE_URL; ?>/actions/logout.php" class="logout-link">Sair</a>
+                            <a href="<?php echo BASE_URL; ?>/actions/logout.php" class="logout-link"><i class="fas fa-right-from-bracket"></i> Sair</a>
                         </div>
                     </div>
                 <?php else: ?>
