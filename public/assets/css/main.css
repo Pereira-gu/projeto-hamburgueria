@@ -213,66 +213,28 @@ input[type="radio"]:checked + .option-box-content span { color: var(--cor-texto-
     .categoria h2 { font-size: 1.8rem; }
 }
 /* --- PÁGINA MINHA CONTA --- */
-.conta-container {
-    max-width: 600px;
-    margin: 0 auto;
-}
-.conta-nav {
-    display: flex;
-    margin-bottom: -1px; /* Faz as abas se conectarem com o form-box */
-}
-.conta-nav-btn {
-    flex-grow: 1;
-    padding: 15px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    border: 1px solid #ddd;
-    background-color: #f5f5f5;
-    color: #777;
-    border-bottom: 1px solid #ddd;
-}
-.conta-nav-btn:first-child {
-    border-top-left-radius: 8px;
-}
-.conta-nav-btn:last-child {
-    border-top-right-radius: 8px;
-}
-.conta-nav-btn.active {
-    background-color: #fff;
-    color: var(--cor-texto-escuro);
-    border-bottom: 1px solid #fff; /* Cobre a borda inferior do form-box */
-}
-.conta-form {
-    display: none; /* Todos os formulários começam escondidos */
-    margin-top: 0;
-    max-width: 100%;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-}
-.conta-form.active {
-    display: block; /* Mostra apenas o formulário ativo */
-}
-.conta-form h2 {
-    display: none; /* Esconde os títulos, pois as abas já os mostram */
-}
+.conta-container {max-width: 600px; margin: 0 auto;}
+.conta-nav {display: flex; margin-bottom: -1px;}
+.conta-nav-btn {flex-grow: 1; padding: 15px; font-size: 1.1rem; font-weight: 600; cursor: pointer; border: 1px solid #ddd; background-color: #f5f5f5; color: #777; border-bottom: 1px solid #ddd;}
+.conta-nav-btn:first-child {border-top-left-radius: 8px;}
+.conta-nav-btn:last-child {border-top-right-radius: 8px;}
+.conta-nav-btn.active {background-color: #fff; color: var(--cor-texto-escuro); border-bottom: 1px solid #fff;}
+.conta-form {display: none; margin-top: 0; max-width: 100%; border-top-left-radius: 0; border-top-right-radius: 0;}
+.conta-form.active {display: block;}
+.conta-form h2 {display: none;}
 
 /* --- ESTILO DO BANNER DE AVISO DE PORTFÓLIO --- */
-.portfolio-banner {
-    background-color: #fff3cd; /* Amarelo claro */
-    color: #856404; /* Texto escuro para contraste */
-    text-align: center;
-    padding: 12px 0;
-    font-size: 0.9rem;
-    font-weight: 500;
-    border-bottom: 1px solid #ffeeba;
-}
-.portfolio-banner p {
-    margin: 0;
-}
+.portfolio-banner {background-color: #fff3cd; color: #856404; text-align: center; padding: 12px 0; font-size: 0.9rem; font-weight: 500;border-bottom: 1px solid #ffeeba;}
+.portfolio-banner p {margin: 0;}
 
 /* --- ESTILOS DO RODAPÉ ATUALIZADO --- */
 .footer-content {display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;}
 .footer-social {display: flex; gap: 20px;}
-.footer-social a {color: var(--cor-texto-claro);font-size: 1.8rem; /* Tamanho do ícone */transition: color 0.3s ease, transform 0.3s ease;}
+.footer-social a {color: var(--cor-texto-claro);font-size: 1.8rem; transition: color 0.3s ease, transform 0.3s ease;}
 .footer-social a:hover {color: var(--cor-primaria); transform: scale(1.1);}
+
+/* --- MELHORIAS NO MENU DE USUÁRIO --- */
+.user-menu-button {gap: 10px;}
+.user-menu-button .fa-user-circle {font-size: 1.5rem; color: var(--cor-primaria);}
+.user-menu-dropdown a {display: flex; align-items: center; gap: 12px;}
+.user-menu-dropdown a .fas {width: 20px; text-align: center;}
