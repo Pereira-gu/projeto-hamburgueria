@@ -84,4 +84,4 @@ Para facilitar a avaliação, pode usar as seguintes contas para testar o sistem
 **Gustavo Pereira**
 
 * **GitHub:** [@Pereira-gu](https://github.com/Pereira-gu)
-* **LinkedIn:** [Gustavo dos Santos Pereira](https://www.linkedin.com/in/gustavo-dos-santos-pereira-9b6471385/)
+* **LinkedIn:** [Gustavo dos Santos Pereira](www.linkedin.com/in/gustavospereira-dev)
